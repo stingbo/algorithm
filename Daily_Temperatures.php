@@ -37,18 +37,65 @@ class DailyTemp
                 $this->result[$compare['key']] = $element['key'] - $compare['key'];
 
                 // 递归比较
-                $this->compare($element, $day);
+                $this->compare($element);
             } else {
                 array_push($this->stack, $element);
             }
         }
     }
+
+    /**
+     * 循环比较.
+     */
+    public function compare2($map)
+    {
+        $res = []; //结果
+
+        $len = count($map);
+        for ($i = 0; $i < $len; ++$i) {
+            $res[$i] = 0;
+            for ($j = $i + 1; $j < $len; ++$j) {
+                if ($map[$j] > $map[$i]) {
+                    $res[$i] = $j - $i;
+                    break;
+                }
+            }
+        }
+
+        return $res;
+    }
+
+    /**
+     * 随机生成测试数据.
+     */
+    public function randElement($len = 10)
+    {
+        for ($i = 0; $i < $len; ++$i) {
+            $map[] = rand(10, 30);
+        }
+
+        return $map;
+    }
 }
 
-$temperatures = [23, 25, 22, 19, 21, 21, 26, 23, 22, 19, 25, 24, 19, 26];
-
 $dt = new DailyTemp();
-$dt->temp($temperatures);
 
-print_r($temperatures);
-print_r($dt->result);
+// 测试元素
+$elemets = $dt->randElement(100000);
+print_r(array_splice($elemets, 0, 10));
+
+// 用栈实现
+$s1 = microtime(true);
+$result1 = $dt->temp($elemets);
+print_r(array_splice($dt->result, 0, 10));
+$e1 = microtime(true);
+echo $e1 - $s1;
+echo PHP_EOL;
+
+// 常规循环实现
+$s2 = microtime(true);
+$result2 = $dt->compare2($elemets);
+print_r(array_splice($result2, 0, 10));
+$e2 = microtime(true);
+echo $e2 - $s2;
+echo PHP_EOL;
