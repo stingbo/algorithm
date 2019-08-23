@@ -48,11 +48,11 @@ class Selection
         }
     }
 
-    public function isSorted($array): boolean
+    public function isSorted(): boolean
     {
         // 测试数组元素是否有序
-        for ($i = 1; $i < count($array); ++$i) {
-            if ($this->less($array[$i], $array[$i - 1])) {
+        for ($i = 1; $i < count($this->comparable); ++$i) {
+            if ($this->less($this->comparable[$i], $this->comparable[$i - 1])) {
                 return false;
             }
         }
