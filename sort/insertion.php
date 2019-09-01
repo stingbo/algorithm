@@ -13,9 +13,18 @@ class Insertion extends Sort
                 $this->exch($j, $j - 1);
             }
         }
+
+        $this->show();
     }
 }
 
-$string = '7329341';
-echo $string.PHP_EOL;
-$select = new Insertion($string);
+$s1 = microtime(true);
+$sort = new Insertion();
+$array = $sort->randElement(10000);
+echo implode(',', $array).PHP_EOL;
+$sort->sort();
+
+echo PHP_EOL;
+$e1 = microtime(true);
+echo $e1 - $s1;
+echo PHP_EOL;

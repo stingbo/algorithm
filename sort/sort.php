@@ -4,12 +4,23 @@ class Sort
 {
     public $comparable = [];
 
-    public function __construct($string)
+    /**
+     * 随机生成测试数据.
+     */
+    public function randElement($len = 10): array
     {
-        // 从标准输入读取字符串,将它们排序并输出
-        $this->comparable = str_split($string);
-        $this->sort();
-        $this->show();
+        for ($i = 0; $i < $len; ++$i) {
+            $map[] = rand(1, 30);
+        }
+
+        $this->setComparable($map);
+
+        return $map;
+    }
+
+    public function setComparable($array): void
+    {
+        $this->comparable = $array;
     }
 
     protected function less($v, $w): bool
@@ -27,9 +38,7 @@ class Sort
     protected function show(): void
     {
         // 在单行中打印数组
-        for ($i = 0; $i < count($this->comparable); ++$i) {
-            print_r($this->comparable[$i]);
-        }
+        echo implode(',', $this->comparable);
     }
 
     public function isSorted(): boolean

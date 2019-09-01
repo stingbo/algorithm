@@ -1,6 +1,6 @@
 <?php
 
-Class Link
+class Link
 {
     public $_link = [];
 
@@ -68,13 +68,13 @@ Class Link
         foreach ($arr as $key => $value) {
             $this->_link[$value]['value'] = $value;
             if (isset($arr[($key - 1)])) {
-                $this->_link[$value]['prev'] = $arr[$key-1];
+                $this->_link[$value]['prev'] = $arr[$key - 1];
             } else {
                 $this->_link[$value]['prev'] = null;
             }
 
             if (isset($arr[($key + 1)])) {
-                $this->_link[$value]['next'] = $arr[$key+1];
+                $this->_link[$value]['next'] = $arr[$key + 1];
             } else {
                 $this->_link[$value]['next'] = null;
             }

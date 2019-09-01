@@ -4,14 +4,6 @@ include './sort.php';
 
 class Selection extends Sort
 {
-    //public function __construct($string)
-    //{
-        //// 从标准输入读取字符串,将它们排序并输出
-        //$this->comparable = str_split($string);
-        //$this->sort();
-        //$this->show();
-    //}
-
     public function sort()
     {
         // 数组长度
@@ -26,9 +18,12 @@ class Selection extends Sort
             }
             $this->exch($i, $min);
         }
+
+        $this->show();
     }
 }
 
-$string = '7329341';
-echo $string.PHP_EOL;
-$select = new Selection($string);
+$sort = new Selection();
+$array = $sort->randElement(10);
+echo implode(',', $array).PHP_EOL;
+$sort->sort();
