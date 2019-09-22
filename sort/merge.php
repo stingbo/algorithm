@@ -2,38 +2,63 @@
 
 include './sort.php';
 
+/**
+ * 归并排序-分治思想.
+ */
 class Merge extends Sort
 {
     public function __construct()
     {
     }
 
-    public function sort()
+    public function mergeSort($arr)
     {
-        // 数组长度
-        $len = count($this->comparable) - 1;
-        $mid = ceil($len / 2);
-        $i = $lo = 0;
-        $j = $mid + 1;
+        $len = count($arr);
+        if ($len <= 1) {
+            return $arr;
+        }
+        $mid = floor($len / 2);
 
-        $aux = [];
-        for ($k = $lo; $k <= $len; $k ++) {
-            $aux[$k] = $this->comparable[$k];
+        // 递归拆分排序
+        $lo = array_slice($arr, 0, $mid);
+        $hi = array_slice($arr, $mid);
+        if (count($lo) > 1) {
+            $lo = $this->mergeSort($lo);
+        }
+        if (count($hi) > 1) {
+            $hi = $this->mergeSort($hi);
         }
 
-        for ($k = $lo; $k <= $len; $k ++) {
-            if ($i > $mid) {
-                $this->comparable[$k] = $aux[$j++];
-            } elseif ($j > $len) {
-                $this->comparable[$k] = $aux[$i++];
-            } elseif ($this->less($aux[$j], $aux[$i])) {
-                $this->comparable[$k] = $aux[$j++];
+        return $this->sort($lo, $hi);
+    }
+
+    public function sort($lo, $hi)
+    {
+        $k = 0;
+        $j = 0;
+        $n = count($lo) + count($hi);
+        $c = [];
+        for ($i = 0; $i < $n; ++$i) {
+            // 剩余部分直接合并到数组末尾
+            if (!isset($lo[$k])) {
+                $c = array_merge($c, array_slice($hi, $j));
+                break;
+            }
+            if (!isset($hi[$j])) {
+                $c = array_merge($c, array_slice($lo, $k));
+                break;
+            }
+
+            if ($lo[$k] >= $hi[$j]) {
+                $c[] = $hi[$j];
+                ++$j;
             } else {
-                $this->comparable[$k] = $aux[$i++];
+                $c[] = $lo[$k];
+                ++$k;
             }
         }
 
-        $this->show();
+        return $c;
     }
 }
 
@@ -41,7 +66,10 @@ $s1 = microtime(true);
 $sort = new Merge();
 $array = $sort->randElement(10);
 echo implode(',', $array).PHP_EOL;
-$sort->sort();
+$test = [8, 2, 7, 9, 6, 1, 5];
+//$sort->sort();
+$rst = $sort->mergeSort($test);
+print_r($rst);
 
 echo PHP_EOL;
 $e1 = microtime(true);
