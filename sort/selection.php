@@ -2,6 +2,10 @@
 
 include './sort.php';
 
+/**
+ * 选择排序.
+ * 交换的次数总是N，算法的时间效率取决与比较的次数.
+ */
 class Selection extends Sort
 {
     public function sort()

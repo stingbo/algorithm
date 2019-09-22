@@ -2,6 +2,12 @@
 
 include './sort.php';
 
+/**
+ * 插入排序.
+ * 与选择排序不同的是，排序时间与初始元素的顺序有关.
+ * 对一个很大且其中元素已经有序（或接近有序）的数组进行排序会比对随机顺序的或逆序数组进行排序要快的多.
+ * 比选择排序快一倍.
+ */
 class Insertion extends Sort
 {
     public function sort()
