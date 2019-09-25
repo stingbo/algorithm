@@ -23,6 +23,9 @@ class Sort
         $this->comparable = $array;
     }
 
+    /**
+     * $v是否比$w小.
+     */
     protected function less($v, $w): bool
     {
         return bccomp($v, $w) < 0;
