@@ -13,6 +13,7 @@ class Quick extends Sort
 
     public function quickSort()
     {
+        shuffle($this->comparable);
         print_r($this->comparable);
         $this->partition(0, count($this->comparable) - 1);
     }
@@ -31,10 +32,10 @@ class Quick extends Sort
                 if ($i == $hi) {
                     break;
                 }
-                while ($this->less($v, $this->comparable[--$j])) {
-                    if ($j == $lo) {
-                        break;
-                    }
+            }
+            while ($this->less($v, $this->comparable[--$j])) {
+                if ($j == $lo) {
+                    break;
                 }
             }
             if ($i >= $j) {
