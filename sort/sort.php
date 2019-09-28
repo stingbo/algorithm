@@ -7,10 +7,10 @@ class Sort
     /**
      * 随机生成测试数据.
      */
-    public function randElement($len = 10): array
+    public function randElement($len = 10, $min = 1, $max = 20): array
     {
         for ($i = 0; $i < $len; ++$i) {
-            $map[] = rand(1, 30);
+            $map[] = rand($min, $max);
         }
 
         $this->setComparable($map);

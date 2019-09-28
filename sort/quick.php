@@ -15,7 +15,21 @@ class Quick extends Sort
     {
         shuffle($this->comparable);
         print_r($this->comparable);
-        $this->partition(0, count($this->comparable) - 1);
+        $this->sort(0, count($this->comparable) - 1);
+
+        //$this->show();
+    }
+
+    public function sort($lo, $hi)
+    {
+        if ($hi < $lo) return;
+
+        $j = $this->partition($lo, $hi);
+        print_r($this->comparable);
+        print_r($j);
+        die;
+        $this->sort($lo, $j - 1);
+        $this->sort($j, $hi);
     }
 
     /**
@@ -46,14 +60,15 @@ class Quick extends Sort
         //echo 'aaa';
         $this->exch($lo, $j);
 
-        print_r($this->comparable);
-        //return $j;
+        //print_r($this->comparable);
+        //echo $j;die;
+        return $j;
     }
 }
 
 $s1 = microtime(true);
 $sort = new Quick();
-$array = $sort->randElement(10);
+$array = $sort->randElement(10, 1, 10);
 echo implode(',', $array).PHP_EOL;
 //$test = [8, 2, 7, 9, 6, 1, 5];
 //$sort->sort();
