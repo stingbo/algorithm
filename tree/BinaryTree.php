@@ -2,13 +2,13 @@
 
 class TreeNode
 {
-    public $node;
+    public $data;
     public $lchild;
     public $rchild;
 
     public function __construct($data)
     {
-        $this->node = $data;
+        $this->data = $data;
     }
 }
 
@@ -41,9 +41,3 @@ class BinaryTree
         return $node;
     }
 }
-
-$array = [3, 2, 9, null, null, 10, null, null, 8, null, 4];
-
-$bt = new BinaryTree($array);
-$td = $bt->createBinaryTree();
-print_r($td);
